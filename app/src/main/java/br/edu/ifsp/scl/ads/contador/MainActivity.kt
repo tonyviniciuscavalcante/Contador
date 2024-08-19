@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.ads.contador.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var amb: ActivityMainBinding
@@ -26,14 +25,19 @@ class MainActivity : AppCompatActivity() {
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
 
-        amb.inicialSp.onItemSelectedListener = object: OnItemSelectedListener{
+        amb.inicialSp.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-
+                contador = when(position) {
+                    0 -> 0
+                    1 -> 5
+                    2 -> 10
+                    else -> 0 // Esgotar as opções quando when é usado como expression.
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -44,14 +48,5 @@ class MainActivity : AppCompatActivity() {
         amb.cliqueBt.setOnClickListener {
             amb.contadorTv.text = ((++contador).toString())
         }
-
-        /*cliqueBt.setOnClickListener(object: View.OnClickListener {
-            override fun onClick(v: View?) {
-                Toast.makeText(this@MainActivity, "vc clicou!", Toast.LENGTH_SHORT).show()
-            }
-        })
-        cliqueBt.setOnClickListener {
-            Toast.makeText(this@MainActivity, "vc clicou!", Toast.LENGTH_SHORT).show()
-        }*/
     }
 }
