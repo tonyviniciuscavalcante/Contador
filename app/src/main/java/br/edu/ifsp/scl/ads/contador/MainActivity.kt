@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.ads.contador.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var amb: ActivityMainBinding
@@ -24,12 +26,19 @@ class MainActivity : AppCompatActivity() {
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
 
-        amb.zeroRb.setOnClickListener{
-            contador = amb.zeroRb.text.toString().toInt()
-        }
+        amb.inicialSp.onItemSelectedListener = object: OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
 
-        amb.dezRb.setOnClickListener {
-            contador = 10
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // NSA
+            }
         }
 
         amb.cliqueBt.setOnClickListener {
